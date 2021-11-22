@@ -2,9 +2,7 @@ sqlplus / as sysdba;
 
 alter session set "_ORACLE_SCRIPT"=true;
 
-CREATE TABLESPACE tbs_perm_13 DATAFILE 'tbs_perm_13.dat' size 4G reuse autoextend ON NEXT 400M maxsize UNLIMITED;
-
-CREATE TEMPORARY TABLESPACE tbs_temp_13 tempfile 'tbs_temp_13.dbf' size 200M autoextend ON;
+ CREATE TABLESPACE. (EITHER IN SQL DEVELOPER OR BY USING SQLPLUS ON CMD)---> CREATE TABLESPACE TBS_PERM_24 DATAFILE 'C:/app/Himanshu/virtual/admin/orcl/dpdump/ompNew.dbf' SIZE 300M;
 
 CREATE USER ALLMERGE Identified BY ALLMERGE DEFAULT TABLESPACE tbs_perm_13 TEMPORARY TABLESPACE tbs_temp_13 Quota 2G ON tbs_perm_13;
 
