@@ -1,21 +1,37 @@
 sqlplus / as sysdba;
+
 alter session set "_ORACLE_SCRIPT"=true;
+
 CREATE TABLESPACE tbs_perm_13 DATAFILE 'tbs_perm_13.dat' size 4G reuse autoextend ON NEXT 400M maxsize UNLIMITED;
+
 CREATE TEMPORARY TABLESPACE tbs_temp_13 tempfile 'tbs_temp_13.dbf' size 200M autoextend ON;
+
 CREATE USER ALLMERGE Identified BY ALLMERGE DEFAULT TABLESPACE tbs_perm_13 TEMPORARY TABLESPACE tbs_temp_13 Quota 2G ON tbs_perm_13;
+
 SELECT directory_name, directory_path FROM dba_directories where directory_name='DATA_PUMP_DIR';
+
 CREATE DIRECTORY DATA_PUMP_DIR AS 'C:\Oracle\admin\orcl\dpdump';
+
 GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO ALLMERGE;
+
 grant imp_full_database to ALLMERGE;
 
 SELECT TABLESPACE_NAME "TABLESPACE", EXTENT_MANAGEMENT,FORCE_LOGGING,BLOCK_SIZE, SEGMENT_SPACE_MANAGEMENT FROM DBA_TABLESPACES;
+
 drop user "PRAS" CASCADE;
+
 CREATE TABLESPACE pras DATAFILE 'pras.dat' size 300M reuse autoextend ON NEXT 30M maxsize UNLIMITED;
+
 DROP TABLESPACE TBS_PERM_24 INCLUDING CONTENTS CASCADE CONSTRAINTS; 
+
 CREATE USER PRAS Identified BY PRAS DEFAULT TABLESPACE PRAS TEMPORARY TABLESPACE PRAS_TEMP Quota 150M ON PRAS;
+
 DROP DIRECTORY test_pras;
+
 GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO PRAS;
+
 CREATE OR REPLACE directory DATA_DUMP_DIR AS 'C:\Oracle\admin\orcl\dpdump';
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 impdp ALLMERGE/ALLMERGE@orcl DIRECTORY=DATA_PUMP_DIR DUMPFILE=EXAMPLE.DMP REMAP_SCHEMA=sourceSchema:targeSchema REMAP_TABLESPACE=source_tablespace:target_tablespace  table_exists_action=replace
