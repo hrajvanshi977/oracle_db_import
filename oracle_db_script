@@ -18,6 +18,6 @@ GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO PRAS;
 CREATE OR REPLACE directory DATA_DUMP_DIR AS 'C:\Oracle\admin\orcl\dpdump';
 -------------------------------------------------------------------------------------------------------------------------------
 
-impdp ALLMERGE/ALLMERGE@orcl DIRECTORY=DATA_PUMP_DIR DUMPFILE=AXISEXOTICSDUMP.DMP REMAP_SCHEMA=sourceSchema:targeSchema REMAP_TABLESPACE=source_tablespace:target_tablespace  table_exists_action=replace
+impdp ALLMERGE/ALLMERGE@orcl DIRECTORY=DATA_PUMP_DIR DUMPFILE=EXAMPLE.DMP REMAP_SCHEMA=sourceSchema:targeSchema REMAP_TABLESPACE=source_tablespace:target_tablespace  table_exists_action=replace
 
 impdp PRAS/PRAS@orcl DIRECTORY=DATA_PUMP_DIR DUMPFILE=PRASDUMP.DMP
